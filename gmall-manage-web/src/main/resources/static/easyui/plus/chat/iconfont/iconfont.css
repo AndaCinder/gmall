@@ -1,0 +1,63 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1499503188628'); /* IE9*/
+  src: url('iconfont.eot?t=1499503188628#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1499503188628') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1499503188628') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1499503188628#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-png:before { content: "\e608"; }
+
+.icon-psd:before { content: "\e609"; }
+
+.icon-txt:before { content: "\e60a"; }
+
+.icon-ppt:before { content: "\e60b"; }
+
+.icon-upload:before { content: "\e60c"; }
+
+.icon-video:before { content: "\e60d"; }
+
+.icon-white:before { content: "\e60e"; }
+
+.icon-zip:before { content: "\e60f"; }
+
+.icon-word:before { content: "\e610"; }
+
+.icon-folder-group:before { content: "\e611"; }
+
+.icon-folder-locked:before { content: "\e612"; }
+
+.icon-folder-open:before { content: "\e613"; }
+
+.icon-folder-personal:before { content: "\e614"; }
+
+.icon-folder:before { content: "\e615"; }
+
+.icon-folder-share:before { content: "\e616"; }
+
+.icon-html:before { content: "\e617"; }
+
+.icon-jpg:before { content: "\e618"; }
+
+.icon-mp:before { content: "\e619"; }
+
+.icon-pdf:before { content: "\e61a"; }
+
+.icon-excel:before { content: "\e61b"; }
+
+.icon-download:before { content: "\e61c"; }
+
+.icon-ai:before { content: "\e61d"; }
+
+.icon-gif:before { content: "\e61e"; }
+

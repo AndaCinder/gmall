@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="easyui-panel" title=""  data-options="border:true">
+    <!-----------------列表 ----------------------------->
+    <table id="spulist_dg" class="easyui-datagrid" title="spu列表"
+           data-options="singleSelect:true,method:'get' ,toolbar:'#spulist_tb'">
+        <thead>
+        <tr>
+            <th data-options="field:'id'" width="10%">商品id </th>
+            <th data-options="field:'spuName'" width="30%">商品名称</th>
+            <th data-options="field:'description'" width="60%">商品描述 </th>
+        </tr>
+        </thead>
+    </table>
+    <!-----------------列表的工具栏----------------------------->
+    <div id="spulist_tb" style="padding:5px;height:auto">
+        <div style="margin-bottom:5px">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addSpuInfo()">添加</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editSpuInfo()">编辑</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteSpuInfo()">删除</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addSkuInfo()">增加sku</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="showSkuInfoList()"> sku列表</a>
+        </div>
+        <div>
+            一级分类：
+            <select id="ctg1ForSpuList"   class="easyui-combobox"   style="width:100px" data-options="valueField:'id',textField:'name',url:'getCatalog1',
+            onSelect:function(rec){
+            $('#ctg2ForSpuList').combobox('clear');
+            $('#ctg3ForSpuList').combobox('clear');
+                    $('#ctg2ForSpuList').combobox('reload','getCatalog2?catalog1Id='+rec.id);
+               }"  ></select>
+            二级分类：
+            <select name="ctg2ForSpuList" id="ctg2ForSpuList"  class="easyui-combobox" data-options="valueField:'id',textField:'name',
+           onSelect:function(rec){
+            $('#ctg3ForSpuList').combobox('clear');
+                    $('#ctg3ForSpuList').combobox('reload','getCatalog3?catalog2Id='+rec.id);
+               }"    style="width:100px" ></select>
+            三级分类：
+            <select name="ctg3ForSpuList" id="ctg3ForSpuList"  class="easyui-combobox" data-options="valueField:'id',textField:'name',
+            onSelect:function(rec){
+                   $('#spulist_dg').datagrid({url:'spuList?catalog3Id='+rec.id});
+               }
+"    style="width:100px" ></select>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search"  onclick="javascript:reloadSpuList()"  >刷新列表</a>
+        </div>
+    </div>
+</div>
+
+<div th:include="spuInfoPage"></div>
+
+<div th:include="skuInfoPage"></div>
+
+<div th:include="skuListPage"></div>
+
+<script language="JavaScript">
+    //打开sku列表
+    function showSkuInfoList() {
+        //打开dialog
+        $("#skulist_dlg").dialog("open");
+
+        //传入spuInfo
+        var spuInfo = $("#spulist_dg").datagrid("getSelected");
+
+        //初始化skuListDatagrid
+        initSkuListDatagrid(spuInfo);
+    }
+
+    //增加spu属性
+    function addSkuInfo(){
+        var select = $("#spulist_dg").datagrid("getSelected");
+        if (!checkBeforeDialog())
+            return ;
+        if (!select){
+            $.messager.alert('警告','请先选择spu对象','warning');
+            return ;
+        }
+        //打开sku添加对话框
+        $("#sku_dlg").dialog("open");
+        //初始化sku dialog
+        var spuInfo = $("#spulist_dg").datagrid("getSelected");
+        initSkuInfoDlg(spuInfo);
+    }
+
+    //加载spuList
+    function reloadSpuList(){
+        if (!checkBeforeDialog()){
+            return ;
+        }
+        var ctg3val=$("#ctg3ForSpuList").combobox('getValue');
+        $('#spulist_dg').datagrid({url:'spuList?catalog3Id='+ctg3val});
+    }
+
+    //添加
+    function addSpuInfo() {
+        if (!checkBeforeDialog())
+            return ;
+
+        //打开SpuInfoPage对话框
+        $("#spu_dlg").dialog("open");
+
+        //初始化对话框
+        initSpuInfoDlg();
+    }
+
+    //编辑
+    function editSpuInfo(){
+        if (!checkBeforeDialog())
+            return ;
+        var spuInfo =$("#spulist_dg").datagrid("getSelected");
+        $("#spu_dlg").dialog("open");
+        initSpuInfoDlg(spuInfo);
+    }
+
+    //删除
+    function deleteSpuInfo() {
+        if (!checkBeforeDialog())
+            return ;
+        $.messager.confirm('Confirm','你确定删除这条记录吗？',function(r){
+            if (r){
+                var spuInfo =$("#spulist_dg").datagrid("getSelected");
+                $("#spu_dlg").datagrid({url:"deleteSpuInfo?spuId="+spuInfo.id});
+                reloadSpuList();
+            }
+        });
+
+    }
+
+    function checkBeforeDialog(){
+        var ctg3val = $("#ctg3ForSpuList").combobox('getValue');
+        if(ctg3val == ''){
+            $.messager.alert('警告','请先选择三级分类','warning');
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+</body>
+</html>

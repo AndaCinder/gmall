@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="/static/easyui/reset.min.css" rel="stylesheet" type="text/css">
+<!--    #easyui.css是Insdep Theme的EasyUI官方组件美化样式，不含其他扩展样式。（必须）-->
+    <link href="/static/easyui/theme.default/master.css" rel="stylesheet" type="text/css">
+<!--    #easyui_animation.css是EasyUI组件等支持动画效果。（可选）-->
+    <link href="/static/easyui/plugin/animate-3.5.2/animate-3.5.2.css" rel="stylesheet" type="text/css">
+<!--    #easyui_color.css是EasyUI组件支持多彩颜色样式。（可选）-->
+<!--    <link href="/static/easyui/easyui_color.css" rel="stylesheet" type="text/css">-->
+<!--   #easyui_plus.css是EasyUI的增强样式表，使其支持更多的额外组件。（可选）&ndash;&gt;-->
+<!--    <link href="/static/easyui/easyui_plus.css" rel="stylesheet" type="text/css">-->
+<!--   #easyui_base.css是Insdep Theme的基础样式表，它包含了一些基础的脚手架样式。（可选）&ndash;&gt;-->
+<!--    <link href="/static/easyui/easyui_base.css" rel="stylesheet" type="text/css">-->
+<!--    #icon.css是EasyUI官方图标样式。（可选）-->
+    <link href="/static/easyui/icon.css" rel="stylesheet" type="text/css">
+<!--    #easyui_full.css是Insdep Theme全部样式包，它包含了以上全部样式（不含reset.min.css或normalize.min.css外）（可选）-->
+    <link href="/static/easyui/easyui_full.css" rel="stylesheet" type="text/css">
+<!--    #jquery脚本库（必须）-->
+    <script type="text/javascript" src="/static/easyui/jquery-1.11.3.min.js"></script>
+<!--    #EasyUI脚本库（必须）-->
+    <script type="text/javascript" src="/static/easyui/jquery.easyui-1.5.2.min.js"></script>
+<!--    #InsdepTheme支持脚本库，包含了中文语言包（必须）-->
+    <script type="text/javascript" src="/static/easyui/insdep-extend.min.js"></script>
+
+    <script type="text/javascript" src="/static/easyui/datagrid-detailview.js"></script>
+    <!--引入WebUploader-->
+    <link rel="stylesheet" type="text/css" href="/static/webuploader/webuploader.css">
+    <script type="text/javascript" src="/static/webuploader/webuploader.js"></script>
+
+
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
+        后台管理系统
+    </div>
+
+    <div data-options="region:'west',split:true,title:'左侧'" style="width:200px;padding:10px;">
+        <div class="easyui-accordion" style="width:200px;" data-options="border:0,mutiple:true">
+            <div title="About" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+                <ul>
+                    <li>
+                        <a href="javascript:addAttrTabs('attrListPage','属性信息管理');" style="text-decoration:none;">属性信息管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div title="Help" data-options="iconCls:'icon-help'" style="padding:10px;">
+                <ul>
+                    <li>
+                        <a href="javascript:addAttrTabs('spuListPage','商品SPU管理');">商品SPU管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:10px 0;">
+                <ul>
+                    <li>
+                       其他管理项
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true,title:'右侧'" style="width:100px;padding:10px;">
+        east region
+    </div>
+    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
+        李琛@copyright 2019
+    </div>
+    <div data-options="region:'center',title:'主体'">
+        <div id="tt" class="easyui-tabs" style="width:100%;height:100%">
+
+        </div>
+    </div>
+
+<script language="JavaScript">
+    function addAttrTabs(href,title) {
+        var b = $("#tt").tabs("exists",title);
+        if (!b) {
+            $("#tt").tabs("add", {
+                title: title,
+                href: href,
+                closable: true
+            });
+        }else {
+            $("#tt").tabs("select",title);
+        }
+    }
+</script>
+</body>
+</html>

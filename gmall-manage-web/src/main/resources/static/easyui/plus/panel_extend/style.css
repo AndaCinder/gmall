@@ -1,0 +1,21 @@
+/*
+  Easyui Of Insdep Theme 2.x 扩展面板
+  https://www.insdep.com/
+*/
+.panel-extend,
+.user-panel-base .user-panel-details dl{ width: 100%; height: auto; overflow:auto; clear: both; position: relative;}
+
+
+.user-panel-base .user-panel-description{ float: left; width: 380px; }
+.user-panel-base .user-panel-details{ margin: 0 0 0 400px; padding: 0 0 0 20px; width: auto; height: auto; overflow: auto; border-left: 1px solid #ececec; }
+.user-panel-base .user-panel-details dl dt{ float:left; width: 60px; }
+.user-panel-base .user-panel-details dl dt,.user-panel-base .user-panel-details dl dd{ height: 22px; line-height: 22px; }
+.user-panel-base .user-panel-details dl dd{ color: #696969; }
+.user-panel-base .user-panel-details dl dd .badge{ margin: 0 0 0 10px; }
+.user-panel-base .user-panel-description h1{ display: block; clear: both; font-size: 24px;}
+.user-panel-base .user-panel-description h1 span{ float: right; font-weight: normal; font-size: 12px; color: #696969; }
+.user-panel-base .user-panel-description dl dt{ color: #696969;}
+.user-panel-base .user-panel-description dl dd{ clear: both; overflow:auto; color: #696969;}
+
+.icons-mail{}
+.icons-tel{}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<body>
+<table id="dg" title="属性列表" class="easyui-datagrid" style="width:100%;height:100%"
+       data-options="fitColumns:true,singleSelect:true,toolbar: '#tb'">
+    <thead>
+    <tr>
+        <th data-options="field:'id'" width="50%">属性ID</th>
+        <th data-options="field:'attrName'" width="50%">属性名称</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="tb">
+    <a href="javascript:addAttrInfo();" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+    <a href="javascript:editAttrInfo();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+    <a href="javascript:deleteAttrInfo();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+    <div>
+        一级分类：<input id="ctg1ForAttrList" class="easyui-combobox" data-options="valueField:'id',textField:'name',url:'getCatalog1',
+        onSelect:function(rec){
+            $('#ctg2ForAttrList').combobox('clear');
+            $('#ctg3ForAttrList').combobox('clear');
+            $('#ctg2ForAttrList').combobox('reload','getCatalog2?catalog1Id='+rec.id);
+        }">
+        二级分类：<input id="ctg2ForAttrList" name="ctg2ForAttrList" class="easyui-combobox" data-options="valueField:'id',textField:'name',
+        onSelect:function(rec){
+            $('#ctg3ForAttrList').combobox('clear');
+            $('#ctg3ForAttrList').combobox('reload','getCatalog3?catalog2Id='+rec.id);
+        }">
+        三级分类：<input id="ctg3ForAttrList" name="ctg3ForAttrList" class="easyui-combobox" data-options="valueField:'id',textField:'name',
+        onSelect:function(rec){
+            $('#dg').datagrid({url: 'getAttrList?catalog3Id=' + rec.id});
+        }">
+        <a href="javascript:reloadAttrList();" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:150px">刷新属性列表</a>
+    </div>
+</div>
+
+<div th:include="attrInfoPage"></div>
+
+<script language="JavaScript">
+    //加载datagrid
+    function reloadAttrList() {
+        var ctg3val = $("#ctg3ForAttrList").combobox("getValue");
+        $('#dg').datagrid({
+            url: 'getAttrList?catalog3Id=' + ctg3val
+        });
+    }
+
+    //添加
+    function addAttrInfo() {
+        if (!checkBeforeDialog()){
+            return ;
+        }
+        //进系统前先清空
+        $("#attrId").val("");
+        $("#attrName").textbox('clear');
+        $('#dg_av').datagrid({url: ''});
+        // 初始化 datagrid
+        initAttrValueDatagrid();
+
+        $("#dlg").dialog("open");
+    }
+
+    //编辑
+    function editAttrInfo() {
+        if (!checkBeforeDialog()){
+            return ;
+        }
+        //初始化datagrid
+        initAttrValueDatagrid();
+        var attrInfoRow = $("#dg").datagrid("getSelected");
+        $("#dg_av").datagrid({
+            url:'getAttrValueList?attrId='+ attrInfoRow.id
+        });
+        $("#attrId").val(attrInfoRow.id);
+        $("#attrName").textbox("setValue",attrInfoRow.attrName);
+
+        $("#dlg").dialog("open");
+    }
+
+    //删除
+    function deleteAttrInfo() {
+        var attrInfoRow = $("#dg").datagrid("getSelected");
+        $.messager.confirm('是否继续？', '你确定要删除这条数据吗？', function(r){
+            if (r){
+                $.ajax({
+                    url: "deleteAttr?id=" + attrInfoRow.id,
+                    success:function(data){
+                        if (data == "success"){
+                            $.messager.alert('消息','删除成功','info');
+                            //关闭窗口
+                            $("#dlg").dialog("close");
+                            //刷新列表
+                            $("#dg").datagrid("reload");
+                        }
+                    }
+                });
+            }
+        });
+
+
+        
+    }
+
+    function checkBeforeDialog(){
+        var ctg3val = $("#ctg3ForAttrList").combobox('getValue');
+        if(ctg3val == ''){
+            $.messager.alert('警告','请先选择三级分类','warning');
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
