@@ -40,6 +40,14 @@ public class GmallManageWebApplicationTests {
         System.out.println(url);
     }
 
+    /**
+     * 生成页面loadcatalog.js所需要的Json的串
+     */
+    @Test
+    public void test1(){
+
+    }
+
 }
 
 

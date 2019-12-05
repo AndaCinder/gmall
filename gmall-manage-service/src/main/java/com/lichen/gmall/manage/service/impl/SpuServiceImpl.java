@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李琛
@@ -181,6 +182,17 @@ public class SpuServiceImpl implements SpuService {
         SpuImage spuImage = new SpuImage();
         spuImage.setSpuId(spuId);
         return spuImageMapper.select(spuImage);
+    }
+
+
+    @Override
+    public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(String skuId,String spuId) {
+        return spuSaleAttrValueMapper.selectSpuSaleAttrListCheckBySku(skuId,spuId);
+    }
+
+    @Override
+    public List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId) {
+        return spuSaleAttrValueMapper.selectSkuSaleAttrValueListBySpu(spuId);
     }
 
 

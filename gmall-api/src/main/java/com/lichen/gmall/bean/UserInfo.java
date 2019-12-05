@@ -19,20 +19,21 @@ public class UserInfo implements Serializable {
     @Column
     private String id;
     @Column
-    private String login_name;
+    private String loginName;
+    @Column
+    private String nickName;
     @Column
     private String passwd;
     @Column
     private String name;
     @Column
-    private String phone_num;
+    private String phoneNum;
     @Column
     private String email;
     @Column
-    private String head_img;
+    private String headIimg;
     @Column
-    private String user_level;
-
+    private String userLevel;
 
     public String getId() {
         return id;
@@ -42,12 +43,20 @@ public class UserInfo implements Serializable {
         this.id = id;
     }
 
-    public String getLogin_name() {
-        return login_name;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setLogin_name(String login_name) {
-        this.login_name = login_name;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getPasswd() {
@@ -66,12 +75,12 @@ public class UserInfo implements Serializable {
         this.name = name;
     }
 
-    public String getPhone_num() {
-        return phone_num;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setPhone_num(String phone_num) {
-        this.phone_num = phone_num;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public String getEmail() {
@@ -82,19 +91,19 @@ public class UserInfo implements Serializable {
         this.email = email;
     }
 
-    public String getHead_img() {
-        return head_img;
+    public String getHeadIimg() {
+        return headIimg;
     }
 
-    public void setHead_img(String head_img) {
-        this.head_img = head_img;
+    public void setHeadIimg(String headIimg) {
+        this.headIimg = headIimg;
     }
 
-    public String getUser_level() {
-        return user_level;
+    public String getUserLevel() {
+        return userLevel;
     }
 
-    public void setUser_level(String user_level) {
-        this.user_level = user_level;
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
     }
 }

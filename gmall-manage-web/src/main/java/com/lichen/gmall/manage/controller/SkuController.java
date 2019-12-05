@@ -8,8 +8,10 @@ import com.lichen.gmall.service.SkuService;
 import com.lichen.gmall.service.SpuService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,7 +24,6 @@ public class SkuController {
     @Reference
     SkuService skuService;
 
-
     @RequestMapping("saveSku")
     public String saveSku(SkuInfo skuInfo){
         skuService.saveSku(skuInfo);
@@ -33,4 +34,11 @@ public class SkuController {
     public List<SkuInfo> skuInfoListBySpu(String spuId){
         return skuService.skuInfoListBySpu(spuId);
     }
+
+    @RequestMapping("deleteSkInfoBySkuId")
+    public String deleteSkInfoBySpuId(String skuId){
+        skuService.deleteSkInfoBySkuId(skuId);
+        return "success";
+    }
+
 }

@@ -29,22 +29,65 @@
     <div id="skulist_tb" style="padding:5px;height:auto">
         <div style="margin-bottom:5px">
             <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editSkuInfo()">编辑</a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteSkuInfo()">删除</a>
         </div>
         <input id="spuIdForSkuList" name="spuIdForSkuId" type="hidden"/>
         <input id="catalog3IdForSkuList" name="catalog3IdForSkuId" type="hidden"/>
         <div>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-search"  onclick="reloadSkuList()"  >刷新列表</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search"  onclick="reloadSkuList()">刷新列表</a>
         </div>
     </div>
 </div>
 <script language="JavaScript">
+
+    function initSkuListDlg(spuId,catalog3Id){
+        $('#spuIdForSkuList').val(spuId);
+        $('#catalog3IdForSkuList').val(catalog3Id);
+        $('#skulist_dlg').dialog("open");
+        initSkuListDatagrid(spuId);
+    }
+
     //初始化skuListdatagrid
-    function initSkuListDatagrid(spuInfo) {
+    function initSkuListDatagrid(spuId) {
         //加载sku数据列表
         $("#skulist_dg").datagrid({
-            url: "skuInfoListBySpu?spuId="+spuInfo.id
+            url: "skuInfoListBySpu?spuId="+spuId
         });
+    }
+
+
+    //skulist_dlg SkuInfo列表datagrid
+    // // 编辑Sku列表
+    function editSkuInfo(){
+        var spuId = $('#spuIdForSkuList').val();
+        var catalog3Id=$('#catalog3IdForSkuList').val();
+        var skuInfo = $('#skulist_dg').datagrid('getSelected');
+        // 走SpuInfoPage中增加的路线，只不过带上数据直接保存进去，嫌麻烦的话，直接删除再插入
+        initSkuInfoDlg(spuId,skuInfo,catalog3Id);  //在spuInfoPage.html中
+    }
+
+    // 刷新SkuL列表
+    function reloadSkuList() {
+        if (!checkBeforeDialog())
+            return;
+        var spuRow= $('#spulist_dg').datagrid('getSelected');
+        var spuId = spuRow.id;
+        $('#skulist_dg').datagrid({
+            url: "skuInfoListBySpu?spuId="+spuId
+        });
+    }
+    //删除SkuInfo信息
+    function deleteSkuInfo() {
+        if (!checkBeforeDialog())
+            return;
+        $.messager.confirm("操作提示","确定删除这条Sku信息吗？","warning",function (r) {
+            if (r){
+                var skuInfo= $("#skulist_dlg").dialog("getSelected");
+                var skuId = skuInfo.id;
+                $("#skulist_dlg").dialog({url:"deleteSkInfoBySkuId?skuId= " + skuId});
+                reloadSkuList();
+            }
+        })
     }
 </script>
 </body>

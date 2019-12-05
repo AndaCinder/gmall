@@ -1,10 +1,8 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @param
@@ -33,5 +31,6 @@ public class BaseCatalog1 implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 }
 

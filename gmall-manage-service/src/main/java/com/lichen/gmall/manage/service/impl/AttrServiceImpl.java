@@ -5,10 +5,12 @@ import com.lichen.gmall.bean.BaseAttrValue;
 import com.lichen.gmall.manage.mapper.BaseAttrInfoMapper;
 import com.lichen.gmall.manage.mapper.BaseAttrValueMapper;
 import com.lichen.gmall.service.AttrService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author 李琛
@@ -99,5 +101,17 @@ public class AttrServiceImpl implements AttrService {
         }
 
         return baseAttrInfoList;
+    }
+
+    /**
+     * 查出BaseAttrInfo的集合
+     * @param valueIds
+     * @return
+     */
+    @Override
+    public List<BaseAttrInfo> getAttrListByValueIds(Set<String> valueIds) {
+        String join = StringUtils.join(valueIds, ",");  //1,2,3,4,5,6,7,8,9
+        List<BaseAttrInfo> baseAttrInfos = baseAttrValueMapper.selectAttrListByValueIds(join);
+        return baseAttrInfos;
     }
 }

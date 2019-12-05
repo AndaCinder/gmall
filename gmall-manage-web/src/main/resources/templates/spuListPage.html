@@ -58,7 +58,7 @@
 <div th:include="skuListPage"></div>
 
 <script language="JavaScript">
-    //打开sku列表
+    /*//打开sku列表
     function showSkuInfoList() {
         //打开dialog
         $("#skulist_dlg").dialog("open");
@@ -68,7 +68,25 @@
 
         //初始化skuListDatagrid
         initSkuListDatagrid(spuInfo);
+        // initSkuListDlg();
+    }*/
+
+    // 打开SkuInfoList窗口
+    function showSkuInfoList(){
+        var spuRow = $('#spulist_dg').datagrid('getSelected');
+        var ctg3val=$("#ctg3ForSpuList").combobox('getValue');
+
+        if(!spuRow){
+            $.messager.alert('警告','请先选择spu','warning');
+        }
+        initSkuListDlg(spuRow.id,ctg3val);
     }
+
+   /* function addSkuInfo() {
+        var spuRow = $('#spulist_dg').datagrid('getSelected');
+        var ctg3val=$("#ctg3ForSpuList").combobox('getValue');
+        initSkuInfoDlg(spuRow.id,'',ctg3val);//在skuInfoPage.html中
+    }*/
 
     //增加spu属性
     function addSkuInfo(){
@@ -82,8 +100,9 @@
         //打开sku添加对话框
         $("#sku_dlg").dialog("open");
         //初始化sku dialog
-        var spuInfo = $("#spulist_dg").datagrid("getSelected");
-        initSkuInfoDlg(spuInfo);
+        var spuRow = $('#spulist_dg').datagrid('getSelected');
+        var ctg3val=$("#ctg3ForSpuList").combobox('getValue');
+        initSkuInfoDlg(spuRow.id,'',ctg3val);//在skuInfoPage.html中
     }
 
     //加载spuList

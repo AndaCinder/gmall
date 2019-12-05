@@ -16,4 +16,7 @@ public interface CatalogService {
     List<BaseCatalog2> getCatalog2(String catalog1Id);
 
     List<BaseCatalog3> getCatalog3(String catalog2Id);
+
+//    //临时
+//    List<BaseCatalog1> getCatalogJson();
 }

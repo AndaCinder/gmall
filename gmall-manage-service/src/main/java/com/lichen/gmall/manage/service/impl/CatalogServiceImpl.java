@@ -8,7 +8,9 @@ import com.lichen.gmall.manage.mapper.Catalog2Mapper;
 import com.lichen.gmall.manage.mapper.Catalog3Mapper;
 import com.lichen.gmall.service.CatalogService;
 import org.apache.dubbo.config.annotation.Service;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class CatalogServiceImpl implements CatalogService {
     public List<BaseCatalog1> getCatalog1() {
         return catalog1Mapper.selectAll();
     }
+
 
     @Override
     public List<BaseCatalog2> getCatalog2(String catalog1Id) {

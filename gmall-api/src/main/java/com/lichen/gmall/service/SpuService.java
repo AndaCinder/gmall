@@ -3,6 +3,7 @@ package com.lichen.gmall.service;
 import com.lichen.gmall.bean.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李琛
@@ -26,4 +27,8 @@ public interface SpuService {
     void deleteSpuInfo(String spuId);
 
     List<SpuImage> getSkuImageListBySpuId(String spuId);
+
+    List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(String skuId,String spuId);
+
+    List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId);
 }

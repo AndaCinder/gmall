@@ -1,6 +1,5 @@
 package com.lichen.gmall.service;
 
-import com.lichen.gmall.bean.BaseAttrInfo;
 import com.lichen.gmall.bean.SkuInfo;
 import com.lichen.gmall.bean.SpuSaleAttr;
 
@@ -17,4 +16,10 @@ public interface SkuService {
 
 
     void saveSku(SkuInfo skuInfo);
+
+    SkuInfo getSkuById(String skuId);
+
+    List<SkuInfo> getSkuListByCatalog3Id(String catalog3Id);
+
+    void deleteSkInfoBySkuId(String skuId);
 }

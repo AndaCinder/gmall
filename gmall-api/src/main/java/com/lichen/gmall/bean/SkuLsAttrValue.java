@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 public class SkuLsAttrValue implements Serializable {
 
-
     String valueId;
 
     public String getValueId() {

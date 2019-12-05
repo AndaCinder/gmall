@@ -86,25 +86,41 @@
         });
 
         //封装默认图片
-        var skuDefalutImg = $("input[name='isD']:checked").val();
+       /* var skuDefalutImg = $("input[name='isD']:checked").val();
         if (!skuDefalutImg) {
             //若未选择默认图片，则默认为第一个图片
-            skuDefalutImg = $("#skuImgDg").datagrid("getRows").eq(0).imgUrl;
+            var i = $("#skuImgDg").datagrid("getRows");
+            alert(i);
+            skuDefalutImg = $("#skuImgDg").datagrid("getRows").find(":eq(0)").imgUrl;   //imgUrl;
         }
-        skuInfo.skuDefaultImg =skuDefalutImg;
+        skuInfo.skuDefaultImg = skuDefalutImg;*/
 
         //封装图片信息
         skuImgDgbeginEdit();
-        var skuImageDgRows= $("#skuImgDg").datagrid("getChecked");
+        var skuImgDgRows = $("#skuImgDg").datagrid('getChecked');
+        for (var i = 0; i < skuImgDgRows.length; i++) {
+            console.log("checkflag:"+skuImgDgRows[i].checkFlag);
+
+            //要跟bean中字段对齐
+            skuInfo["skuImageList[" + i + "].imgName"] = skuImgDgRows[i].imgName;
+            skuInfo["skuImageList[" + i + "].imgUrl"] = skuImgDgRows[i].imgUrl;
+            if(skuImgDgRows[i].isDefault=='1'){
+                skuInfo["skuDefaultImg"]=skuImgDgRows[i].imgUrl;
+            }
+            skuInfo["skuImageList[" + i + "].spuImgId"] = skuImgDgRows[i].id;
+            skuInfo["skuImageList[" + i + "].isDefault"] = skuImgDgRows[i].isDefault;
+        }
+
+
+        /*var skuImageDgRows= $("#skuImgDg").datagrid("getChecked");
         $(skuImageDgRows).each(function (i, select) {
             skuInfo["skuImageList["+i+"].spuImgId"] = select.id;
             skuInfo["skuImageList["+i+"].imgName"] = select.imgName;
             skuInfo["skuImageList["+i+"].imgUrl"] = select.imgUrl;
             if (select.imgUrl == skuDefalutImg)
                 skuInfo["skuImageList["+i+"].isDefault"] = "1";
-        });
-
-
+        });*/
+        //异步保存
         $.post('saveSku',skuInfo,function (data) {
             if (data == "success"){
                 $.messager.alert('信息','Sku保存成功','info');
@@ -119,11 +135,13 @@
 
 
     }
-
-    //初始化SkuDialog
+    /*//初始化SkuDialog
     function initSkuInfoDlg(spuInfo) {
         var catalog3Id= $("#ctg3ForSpuList").combobox("getValue");
         var spuId = spuInfo.id;
+        //打开对话框
+        $('#sku_dlg').dialog("open");
+        console.log("初始化文本sku："+ JSON.stringify(skuInfo));
         //初始化sku表单
         $("#spuIdForSku").val(spuInfo.id);
         //初始化平台属性
@@ -138,12 +156,94 @@
         initSkuImgListDatagrid(spuId);
 
         console.log("清理表单!!!");
+    }*/
+
+    //初始化SkuDialog
+    function initSkuInfoDlg(spuId,skuInfo,catalog3Id){
+        //打开对话框
+        $('#sku_dlg').dialog("open");
+        console.log("初始化文本sku："+ JSON.stringify(skuInfo));
+
+        //初始化 表单
+        initSkuForm(spuId,catalog3Id)
+
+        loadSkuForm(skuInfo);
+
+        //初始化图片表格
+        initSkuImgListDatagrid(spuId) ;
+
+        //初始化
+        console.log("初始化销售属性!!!");
+        initSpuSaleAttrGroup(spuId,skuInfo);
+
+        console.log("初始化平台属性!!!");
+        initAttrInfoGroup(catalog3Id);
+
+        console.log("清理表单!!!");
+
     }
+
+    //加载图片数据
+    function loadSkuImg(skuInfo){
+        if($("#skuInfo").val()==''){
+            return;
+        }
+        var skuInfo=JSON.parse($("#skuInfo").val());
+        console.log("加载sku图片:"+skuInfo+"||"+skuInfo.skuImageList);
+        if(!skuInfo||!skuInfo.skuImageList){
+            return;
+        }
+        console.log("加载sku图片:"+skuInfo+"||"+skuInfo.skuImageList);
+        var imgDg=$('#skuImgDg') ;
+        var imgRows =imgDg.datagrid("getRows");
+        var skuImgList=skuInfo.skuImageList;
+        for (var i = 0; i < imgRows.length; i++) {
+            var imgRow = imgRows[i];
+            for (var j = 0; j < skuImgList.length; j++) {
+                var skuImg = skuImgList[j];
+                console.log("imgVs::::::"+skuImg.spuImgId+"||"+imgRow.id);
+                if(skuImg.spuImgId==imgRow.id){
+                    imgDg.datagrid("checkRow",i);
+                    imgDg.datagrid("updateRow",{index:i,row:{isDefault:skuImg.isDefault}});
+                }
+            }
+        }
+    }
+    // 加载SKU表单
+    function loadSkuForm(skuInfo){
+        console.log("开始加载sku表单："+skuInfo.id);
+        if(!skuInfo||!skuInfo.id){
+            return;
+        }
+        console.log("开始加载sku表单："+skuInfo.skuName);
+        $("#skuName").textbox('setValue',skuInfo.skuName);
+        $("#skuDesc").textbox('setValue',skuInfo.skuDesc);
+        $("#price").textbox('setValue', skuInfo.price);
+        $("#weight").textbox('setValue',skuInfo.weight);
+        $("#spuIdForSku").val(skuInfo.spuId);
+        $("#skuDefaultImg").val(skuInfo.skuDefaultImg);
+        $("#skuId").val(skuInfo.id);
+        $("#catalog3IdForSku").val(skuInfo.catalog3Id);
+        $("#skuInfo").val(JSON.stringify(skuInfo));//用于异步加载的 暂存
+        console.log("skuInfo in hidden:"+$("#skuInfo").val());
+
+    }
+
+    // 初始化SKU表单
+    function initSkuForm(spuId,catalog3Id){
+        $("#skuForm").form('clear');
+
+        $("#spuIdForSku").val(spuId);
+        $("#catalog3IdForSku").val(catalog3Id);
+    }
+
+
 
 
 
     //初始化平台属性信息
     function initAttrInfoGroup(catalog3Id){
+        console.log("初始化平台属性:"+catalog3Id);
         var attrInfoList = {};
         $('#attrInfoGroup').html("");
         $.get("getAttrListByCtg3Id?catalog3Id="+catalog3Id,function (data) {
@@ -160,9 +260,32 @@
                 attrInfoHtml += "</select>";
                 $("#attrInfoGroup").append($(attrInfoHtml));
             }
-
-
+            // 加载sku平台属性
+            loadSkuAttrInfo(skuInfo);
         });
+    }
+
+    function loadSkuAttrInfo(){
+        if($("#skuInfo").val()==''){
+            return;
+        }
+        var skuInfo=JSON.parse($("#skuInfo").val())  ;
+        console.log("开始加载sku平台属性："+skuInfo.skuAttrValueList);
+        if(!skuInfo||!skuInfo.skuAttrValueList){
+            return;
+        }
+        var skuAttrValueList=skuInfo.skuAttrValueList;
+        var selects = $('#attrInfoGroup').find("select");
+        console.log(" selects.html():111:"+ selects.html());
+        for (var i = 0; i < selects.length; i++) {
+            var select = selects.eq(i);
+            for (var j = 0; j < skuAttrValueList.length; j++) {
+                console.log(" AttrVs::::::"+skuAttrValueList[j].attrId+"||"+select.attr("attrId"));
+                if(skuAttrValueList[j].attrId==select.attr("attrId")) {
+                    select.val(skuAttrValueList[j].valueId);
+                }
+            }
+        }
     }
 
     //初始化销售属性
@@ -187,8 +310,33 @@
                 spuSaleAttrGroup.append($(spuSaleAttrHtml));
 
             }
-            // loadSkuSaleAttr();
+            loadSkuSaleAttr();
         });
+    }
+    // 加载Sku销售属性
+    function loadSkuSaleAttr(){
+        if($("#skuInfo").val()==''){
+            return;
+        }
+        var skuInfo=JSON.parse($("#skuInfo").val());
+        console.log("开始加载sku销售属性："+skuInfo.skuSaleAttrValueList);
+        if(!skuInfo ||!skuInfo.skuSaleAttrValueList){
+            return;
+        }
+        var skuSaleAttrValueList=skuInfo.skuSaleAttrValueList;
+        var selects = $("#spuSaleAttrGroup").find("select");
+        console.log(" selects.html()::"+ selects.html())
+        for (var i = 0; i < selects.length; i++) {
+            var select = selects.eq(i);
+            for (var j = 0; j < skuSaleAttrValueList.length; j++) {
+                console.log("SaleAttrVs::::::"+skuSaleAttrValueList[j].saleAttrId+"||"+select.attr("saleAttrId"));
+                if(skuSaleAttrValueList[j].saleAttrId==select.attr("saleAttrId")) {
+                    console.log("skuSaleAttrValueList[j].saleAttrValueId+++"+skuSaleAttrValueList[j].saleAttrValueId);
+                    select.val(skuSaleAttrValueList[j].saleAttrValueId);
+                }
+
+            }
+        }
     }
 
     //初始化图片列表
@@ -219,7 +367,7 @@
             onLoadSuccess: function () {   //隐藏表头的checkbox
                 console.log("共加载"+skuImgDg.datagrid("getRows").length+"行");
                 //窗口打开编辑模式
-                // loadSkuImg(skuInfo);
+                loadSkuImg(skuInfo);
                 skuImgDgbeginEdit();
             }
         });
@@ -228,32 +376,7 @@
         $('#skuImgDg').datagrid({url:'getSkuImageListBySpuId?spuId='+spuId});
 
     }
-    //加载图片数据
-    function loadSkuImg(skuInfo){
-        if($("#skuInfo").val()==''){
-            return;
-        }
-        var skuInfo=JSON.parse($("#skuInfo").val());
-        console.log("加载sku图片:"+skuInfo+"||"+skuInfo.skuImageList);
-        if(!skuInfo||!skuInfo.skuImageList){
-            return;
-        }
-        console.log("加载sku图片:"+skuInfo+"||"+skuInfo.skuImageList);
-        var imgDg=$('#skuImgDg') ;
-        var imgRows =imgDg.datagrid("getRows");
-        var skuImgList=skuInfo.skuImageList;
-        for (var i = 0; i < imgRows.length; i++) {
-            var imgRow = imgRows[i];
-            for (var j = 0; j < skuImgList.length; j++) {
-                var skuImg = skuImgList[j];
-                console.log("imgVs::::::"+skuImg.spuImgId+"||"+imgRow.id);
-                if(skuImg.spuImgId==imgRow.id){
-                    imgDg.datagrid("checkRow",i);
-                    imgDg.datagrid("updateRow",{index:i,row:{isDefault:skuImg.isDefault}});
-                }
-            }
-        }
-    }
+
 
     //窗口打开编辑模式
     function skuImgDgbeginEdit(){

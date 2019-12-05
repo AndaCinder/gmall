@@ -5,28 +5,27 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * es中的sku的参数
  * @param
  * @return
  */
 public class SkuLsInfo implements Serializable {
 
+    String id;
 
+    BigDecimal price;
 
-        String id;
+    String skuName;
 
-        BigDecimal price;
+    String skuDesc;
 
-        String skuName;
+    String catalog3Id;
 
-        String skuDesc;
+    String skuDefaultImg;
 
-        String catalog3Id;
+    Long hotScore=0L;
 
-        String skuDefaultImg;
-
-        Long hotScore=0L;
-
-        List<SkuLsAttrValue> skuAttrValueList;
+    List<SkuLsAttrValue> skuAttrValueList;
 
     public String getId() {
         return id;

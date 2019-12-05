@@ -48,8 +48,6 @@ public class SkuInfo  implements Serializable {
     @Transient
     List<SkuSaleAttrValue> skuSaleAttrValueList;
 
-
-
     public String getId() {
         return id;
     }

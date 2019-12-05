@@ -1,4 +1,4 @@
-package com.lichen.gmall.manage;
+package com.lichen.gmall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

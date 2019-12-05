@@ -25,7 +25,6 @@ public class SpuSaleAttr implements Serializable {
     @Column
     String saleAttrName;
 
-
     @Transient
     List<SpuSaleAttrValue> spuSaleAttrValueList;
 

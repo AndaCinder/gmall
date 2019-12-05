@@ -4,6 +4,7 @@ import com.lichen.gmall.bean.BaseAttrInfo;
 import com.lichen.gmall.bean.BaseAttrValue;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author 李琛
@@ -19,4 +20,6 @@ public interface AttrService {
     void deleteAttr(String id);
 
     List<BaseAttrInfo> getAttrListByCtg3Id(String catalog3Id);
+
+    List<BaseAttrInfo> getAttrListByValueIds(Set<String> valueIds);
 }
