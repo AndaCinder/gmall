@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Thymeleaf</h1>
+    <!--取值-->
+    <div th:text="${hello}">默认内容</div>
+    <!--循环-->
+    <div th:each="users:${userInfos}">
+        <div th:text="${users.nickName}"></div><div th:text="${users.phoneNum}"></div>
+    </div>
+
+    <!--判断-->
+    <div th:if="${hello=='hello'}">判断结果显示</div>
+    <div th:text="(${hello=='hello'})?'yes':'no'">判断结果显示</div>
+
+    <!--引入-->
+    <div th:include="test"></div>
+    <div th:include="test::inner"></div>
+    <!--js函数调用-->
+    <a th:href="'javascript:a(\''+${hello}+'\')'">发把狙，不然炸木星</a>
+
+<script language="JavaScript">
+    function a(hello) {
+        alert(hello+"WDNMD!");
+    }
+</script>
+</body>
+</html>
