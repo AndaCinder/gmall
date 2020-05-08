@@ -1,9 +1,9 @@
 package com.lichen.gmall.manage.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.lichen.gmall.bean.*;
 import com.lichen.gmall.service.AttrService;
 import com.lichen.gmall.service.SpuService;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,7 +54,7 @@ public class SpuController {
      */
     @RequestMapping("spuImageList")
     public List<SpuImage> spuImageList(String spuId){
-        return spuService.spuImageList(spuId);
+        return spuService.getSpuImageList(spuId);
     }
 
     /**
@@ -62,7 +62,7 @@ public class SpuController {
      */
     @RequestMapping("spuSaleAttrList")
     public List<SpuSaleAttr> spuSaleAttrList(String spuId){
-        List<SpuSaleAttr> spuSaleAttrs = spuService.spuSaleAttrList(spuId);
+        List<SpuSaleAttr> spuSaleAttrs = spuService.getSpuSaleAttrListBySpuId(spuId);
         for (SpuSaleAttr spuSaleAttr : spuSaleAttrs) {
             List<SpuSaleAttrValue> spuSaleAttrValues = spuService.spuSaleAttrValueList(spuSaleAttr);
             Map map = new HashMap<>();
@@ -75,7 +75,7 @@ public class SpuController {
 
     @RequestMapping("spuList")
     public List<SpuInfo> getSpuList(String catalog3Id){
-        return spuService.getSpuList(catalog3Id);
+        return spuService.spuList(catalog3Id);
     }
 
 
@@ -86,7 +86,7 @@ public class SpuController {
 
     @RequestMapping("deleteSpuInfo")
     public String deleteSpuInfo(String spuId){
-        spuService.deleteSpuInfo(spuId);
+        spuService.deleteSpu(spuId);
         return "success";
     }
 }

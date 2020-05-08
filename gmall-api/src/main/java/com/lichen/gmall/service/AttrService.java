@@ -6,20 +6,17 @@ import com.lichen.gmall.bean.BaseAttrValue;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author 李琛
- * 2019/7/10 - 8:51
- */
 public interface AttrService {
-    List<BaseAttrInfo> getAttrList(String catalog3Id);
 
-    List<BaseAttrValue> getAttrValueList(String attrId);
+    List<BaseAttrInfo> getAttrList(String catalog3Id);
 
     void saveAttr(BaseAttrInfo baseAttrInfo);
 
-    void deleteAttr(String id);
+    List<BaseAttrValue> getAttrValue(String attrName);
 
-    List<BaseAttrInfo> getAttrListByCtg3Id(String catalog3Id);
+    void deleteAttr(String attrId);
+
+    List<BaseAttrInfo> getAttrListByCtg3Id(String ctg3Id);
 
     List<BaseAttrInfo> getAttrListByValueIds(Set<String> valueIds);
 }

@@ -4,32 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link href="/static/easyui/reset.min.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/reset.min.css" rel="stylesheet" type="text/css">
 <!--    #easyui.css是Insdep Theme的EasyUI官方组件美化样式，不含其他扩展样式。（必须）-->
-    <link href="/static/easyui/theme.default/master.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/theme.default/master.css" rel="stylesheet" type="text/css">
 <!--    #easyui_animation.css是EasyUI组件等支持动画效果。（可选）-->
-    <link href="/static/easyui/plugin/animate-3.5.2/animate-3.5.2.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/plugin/animate-3.5.2/animate-3.5.2.css" rel="stylesheet" type="text/css">
 <!--    #easyui_color.css是EasyUI组件支持多彩颜色样式。（可选）-->
-<!--    <link href="/static/easyui/easyui_color.css" rel="stylesheet" type="text/css">-->
+<!--    <link href="/easyui/easyui_color.css" rel="stylesheet" type="text/css">-->
 <!--   #easyui_plus.css是EasyUI的增强样式表，使其支持更多的额外组件。（可选）&ndash;&gt;-->
-<!--    <link href="/static/easyui/easyui_plus.css" rel="stylesheet" type="text/css">-->
+<!--    <link href="/easyui/easyui_plus.css" rel="stylesheet" type="text/css">-->
 <!--   #easyui_base.css是Insdep Theme的基础样式表，它包含了一些基础的脚手架样式。（可选）&ndash;&gt;-->
-<!--    <link href="/static/easyui/easyui_base.css" rel="stylesheet" type="text/css">-->
+<!--    <link href="/easyui/easyui_base.css" rel="stylesheet" type="text/css">-->
 <!--    #icon.css是EasyUI官方图标样式。（可选）-->
-    <link href="/static/easyui/icon.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/icon.css" rel="stylesheet" type="text/css">
 <!--    #easyui_full.css是Insdep Theme全部样式包，它包含了以上全部样式（不含reset.min.css或normalize.min.css外）（可选）-->
-    <link href="/static/easyui/easyui_full.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/easyui_full.css" rel="stylesheet" type="text/css">
 <!--    #jquery脚本库（必须）-->
-    <script type="text/javascript" src="/static/easyui/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery-1.11.3.min.js"></script>
 <!--    #EasyUI脚本库（必须）-->
-    <script type="text/javascript" src="/static/easyui/jquery.easyui-1.5.2.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui-1.5.2.min.js"></script>
 <!--    #InsdepTheme支持脚本库，包含了中文语言包（必须）-->
-    <script type="text/javascript" src="/static/easyui/insdep-extend.min.js"></script>
+    <script type="text/javascript" src="/easyui/insdep-extend.min.js"></script>
 
-    <script type="text/javascript" src="/static/easyui/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="/easyui/datagrid-detailview.js"></script>
     <!--引入WebUploader-->
-    <link rel="stylesheet" type="text/css" href="/static/webuploader/webuploader.css">
-    <script type="text/javascript" src="/static/webuploader/webuploader.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webuploader/webuploader.css">
+    <script type="text/javascript" src="/webuploader/webuploader.js"></script>
 
 
 </head>
@@ -57,7 +57,7 @@
             <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:10px 0;">
                 <ul>
                     <li>
-                       其他管理项
+                       <a href="javascript:addAttrTabs('statisticsPage','统计图表');">统计图表</a>
                     </li>
                 </ul>
             </div>
@@ -88,6 +88,8 @@
             $("#tt").tabs("select",title);
         }
     }
+	
+	
 </script>
 </body>
 </html>

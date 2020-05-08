@@ -1,25 +1,19 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @param
- * @return
- */
 public class BaseAttrInfo implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column
     private String id;
-    @Column
     private String attrName;
-    @Column
     private String catalog3Id;
-    @Column
     private String isEnabled;
+
     @Transient
     List<BaseAttrValue> attrValueList;
 

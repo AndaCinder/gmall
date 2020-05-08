@@ -1,81 +1,73 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @param
- * @return
- */
 public class SpuSaleAttr implements Serializable {
-    @Id
-    @Column
-    String id ;
 
-    @Column
-    String spuId;
+  private String id;
+  private String spuId;
+  private String saleAttrId;
+  private String saleAttrName;
 
-    @Column
-    String saleAttrId;
+  @Transient
+  private List<SpuSaleAttrValue> spuSaleAttrValueList;
 
-    @Column
-    String saleAttrName;
+  @Transient
+  private Map<String, String> spuSaleAttrValueJson;
 
-    @Transient
-    List<SpuSaleAttrValue> spuSaleAttrValueList;
+  public String getId() {
+    return id;
+  }
 
-    @Transient
-    Map spuSaleAttrValueJson;
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getSpuId() {
+    return spuId;
+  }
 
-    public String getSpuId() {
-        return spuId;
-    }
+  public void setSpuId(String spuId) {
+    this.spuId = spuId;
+  }
 
-    public void setSpuId(String spuId) {
-        this.spuId = spuId;
-    }
 
-    public String getSaleAttrId() {
-        return saleAttrId;
-    }
+  public String getSaleAttrId() {
+    return saleAttrId;
+  }
 
-    public void setSaleAttrId(String saleAttrId) {
-        this.saleAttrId = saleAttrId;
-    }
+  public void setSaleAttrId(String saleAttrId) {
+    this.saleAttrId = saleAttrId;
+  }
 
-    public String getSaleAttrName() {
-        return saleAttrName;
-    }
 
-    public void setSaleAttrName(String saleAttrName) {
-        this.saleAttrName = saleAttrName;
-    }
+  public String getSaleAttrName() {
+    return saleAttrName;
+  }
 
-    public List<SpuSaleAttrValue> getSpuSaleAttrValueList() {
-        return spuSaleAttrValueList;
-    }
+  public List<SpuSaleAttrValue> getSpuSaleAttrValueList() {
+    return spuSaleAttrValueList;
+  }
 
-    public void setSpuSaleAttrValueList(List<SpuSaleAttrValue> spuSaleAttrValueList) {
-        this.spuSaleAttrValueList = spuSaleAttrValueList;
-    }
+  public void setSpuSaleAttrValueList(List<SpuSaleAttrValue> spuSaleAttrValueList) {
+    this.spuSaleAttrValueList = spuSaleAttrValueList;
+  }
 
-    public Map getSpuSaleAttrValueJson() {
-        return spuSaleAttrValueJson;
-    }
+  public Map<String, String> getSpuSaleAttrValueJson() {
+    return spuSaleAttrValueJson;
+  }
 
-    public void setSpuSaleAttrValueJson(Map spuSaleAttrValueJson) {
-        this.spuSaleAttrValueJson = spuSaleAttrValueJson;
-    }
+  public void setSpuSaleAttrValueJson(Map<String, String> spuSaleAttrValueJson) {
+    this.spuSaleAttrValueJson = spuSaleAttrValueJson;
+  }
+
+  public void setSaleAttrName(String saleAttrName) {
+
+    this.saleAttrName = saleAttrName;
+  }
+
 }

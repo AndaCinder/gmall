@@ -5,30 +5,27 @@ import com.lichen.gmall.bean.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author 李琛
- * 2019/7/11 - 9:47
- */
 public interface SpuService {
-    List<SpuInfo> getSpuList(String catalog3Id);
+    List<SpuInfo> spuList(String catalog3Id);
 
     List<BaseSaleAttr> baseSaleAttrList();
 
     void saveSpu(SpuInfo spuInfo);
 
-    List<SpuImage> spuImageList(String spuId);
+    List<SpuImage> getSpuImageList(String spuId);
 
-    List<SpuSaleAttr> spuSaleAttrList(String spuId);
+    List<SpuSaleAttr> getSpuSaleAttrList(String spuId);
+
+    void deleteSpu(String spuId);
 
     List<SpuSaleAttr> getSpuSaleAttrListBySpuId(String spuId);
 
-    List<SpuSaleAttrValue> spuSaleAttrValueList(SpuSaleAttr spuSaleAttr);
+    List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(Map<String, String> idMap);
 
-    void deleteSpuInfo(String spuId);
+    List<SkuInfo> getSkuSaleAttrValueListBySpu(String spuId);
 
+    //
     List<SpuImage> getSkuImageListBySpuId(String spuId);
 
-    List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(String skuId,String spuId);
-
-    List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId);
+    List<SpuSaleAttrValue> spuSaleAttrValueList(SpuSaleAttr spuSaleAttr);
 }

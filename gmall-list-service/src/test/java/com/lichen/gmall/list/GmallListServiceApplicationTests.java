@@ -1,18 +1,16 @@
 package com.lichen.gmall.list;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.lichen.gmall.bean.SkuInfo;
 import com.lichen.gmall.bean.SkuLsInfo;
-import com.lichen.gmall.list.util.MatchQueryBuilderLiChen;
 import com.lichen.gmall.service.SkuService;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Test;
@@ -24,9 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -59,8 +55,7 @@ public class GmallListServiceApplicationTests {
 
 
         //创建匹配语句
-        MatchQueryBuilderLiChen matchQueryBuilder = new MatchQueryBuilderLiChen("skuName","XR");
-        matchQueryBuilder.autoGenerateSynonymsPhraseQuery(false);
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("skuName","XR");
         boolQueryBuilder.must(matchQueryBuilder);
 
         dsl.query(boolQueryBuilder);
@@ -78,7 +73,7 @@ public class GmallListServiceApplicationTests {
         //es查询
         List<SkuLsInfo> skuLsInfos  = new ArrayList<>();
         String query = getMyDsl();
-        Search search = new Search.Builder(query).addIndex("gmall").addType("SkuLsInfo").build();
+        Search search = new Search.Builder(query).addIndex("gmall").addType("skuLsInfo").build();
 
         try {
             //执行ES查询语句获得hits（命中的结果）
@@ -124,7 +119,7 @@ public class GmallListServiceApplicationTests {
 
         // 导入到ES中
         for (SkuLsInfo skuLsInfo : skuLsInfos) {
-            Index index = new Index.Builder(skuLsInfo).index("gmall").type("SkuLsInfo").id(skuLsInfo.getId()).build();
+            Index index = new Index.Builder(skuLsInfo).index("gmall").type("skuLsInfo").id(skuLsInfo.getId()).build();
 //            System.out.println(index.toString());
             try {
                 jestClient.execute(index);

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 接口的全路径-->
+<mapper namespace="com.lichen.gmall.manage.mapper.SpuSaleAttrMapper">
+    <!--定义返回结果集
+        id : 表示唯一标识
+        type：返回结果集的类型
+        autoMapping: 自动映射
+    -->
+    <resultMap id="spuSaleAttrMap" type="com.lichen.gmall.bean.SpuSaleAttr" autoMapping="true">
+        <!--id:标识主键
+            property：属性名称
+            column：列名
+        -->
+        <id property="id" column="id"></id>
+        <!--普通字段-->
+        <!--<result property="spuId" column="spuId"></result>-->
+        <!--mybatis 如何配置1：n-->
+        <!--ofType 返回结果集类型-->
+        <collection property="spuSaleAttrValueList" ofType="com.lichen.gmall.bean.SpuSaleAttrValue" autoMapping="true">
+            <!--如果有字段名称重复的情况下，应该使用别名-->
+            <id property="id" column="sale_attr_value_id"></id>
+        </collection>
+    </resultMap>
+    <!--id：表示方法名
+    resultMap：使用的是哪个结果集-->
+    <select id="selectSpuSaleAttrList" resultMap="spuSaleAttrMap">
+        select sa.id ,sa.spu_id, sa.sale_attr_name,sa.sale_attr_id,
+        sv.id sale_attr_value_id,
+        sv.sale_attr_value_name
+        from spu_sale_attr sa inner join spu_sale_attr_value  sv
+        on  sa.spu_id=sv.spu_id and sa.sale_attr_id=sv.sale_attr_id
+        where  sa.spu_id=#{spu_id}
+    </select>
+
+    <!--resultType ：返回类型-->
+    <!--使用通用mapper 的时候，传递多个值的情况下，使用arg0 ,arg1
+        如果是mybatis #{0} #{1}
+
+        # ，$ 区别！
+        写jdbc 编程的时候，如何防止sql 注入？
+    -->
+    <select id="selectSpuSaleAttrListCheckBySku" resultMap="spuSaleAttrMap">
+      SELECT sa.id ,sa.spu_id, sa.sale_attr_name,sa.sale_attr_id,
+        sv.id sale_attr_value_id,
+        sv.sale_attr_value_name,
+        skv.sku_id,
+        IF(skv.sku_id IS NULL,0,1)  is_checked
+        FROM spu_sale_attr sa
+        INNER JOIN spu_sale_attr_value  sv ON  sa.spu_id=sv.spu_id AND sa.sale_attr_id=sv.sale_attr_id
+        LEFT JOIN sku_sale_attr_value skv ON skv.sale_attr_id= sa.sale_attr_id AND skv.sale_attr_value_id=sv.id AND skv.sku_id=#{arg0}
+        WHERE  sa.spu_id=#{arg1}
+        ORDER BY sv.sale_attr_id,sv.id
+    </select>
+</mapper>

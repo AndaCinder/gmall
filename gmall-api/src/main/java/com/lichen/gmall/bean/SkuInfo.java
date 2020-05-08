@@ -1,138 +1,38 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @param
- * @return
- */
-public class SkuInfo  implements Serializable {
+@Data
+@Accessors(chain = true)
+public class SkuInfo implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column
-    String id;
+  @Id
+  @GeneratedValue(generator = "JDBC")//增加这个注解解决了通用Mapper的insert不返回主键的问题
+  private String id;
+  private String spuId;
+  private BigDecimal price;
+  private String skuName;
+  private String skuDesc;
+  private String weight;
+  private String tmId;
+  private String catalog3Id;
+  private String skuDefaultImg;
 
-    @Column
-    String spuId;
+  @Transient
+  List<SkuImage> skuImageList;
+  @Transient
+  List<SkuAttrValue> skuAttrValueList;
+  @Transient
+  List<SkuSaleAttrValue> skuSaleAttrValueList;
 
-    @Column
-    BigDecimal price;
 
-    @Column
-    String skuName;
 
-    @Column
-    BigDecimal weight;
-
-    @Column
-    String skuDesc;
-
-    @Column
-    String catalog3Id;
-
-    @Column
-    String skuDefaultImg;
-
-    @Transient
-    List<SkuImage> skuImageList;
-
-    //平台属性
-    @Transient
-    List<SkuAttrValue> skuAttrValueList;
-
-    //销售属性
-    @Transient
-    List<SkuSaleAttrValue> skuSaleAttrValueList;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSpuId() {
-        return spuId;
-    }
-
-    public void setSpuId(String spuId) {
-        this.spuId = spuId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getSkuName() {
-        return skuName;
-    }
-
-    public void setSkuName(String skuName) {
-        this.skuName = skuName;
-    }
-
-    public BigDecimal getWeight() {
-        return weight;
-    }
-
-    public void setWeight(BigDecimal weight) {
-        this.weight = weight;
-    }
-
-    public String getSkuDesc() {
-        return skuDesc;
-    }
-
-    public void setSkuDesc(String skuDesc) {
-        this.skuDesc = skuDesc;
-    }
-
-    public String getCatalog3Id() {
-        return catalog3Id;
-    }
-
-    public void setCatalog3Id(String catalog3Id) {
-        this.catalog3Id = catalog3Id;
-    }
-
-    public String getSkuDefaultImg() {
-        return skuDefaultImg;
-    }
-
-    public void setSkuDefaultImg(String skuDefaultImg) {
-        this.skuDefaultImg = skuDefaultImg;
-    }
-
-    public List<SkuImage> getSkuImageList() {
-        return skuImageList;
-    }
-
-    public void setSkuImageList(List<SkuImage> skuImageList) {
-        this.skuImageList = skuImageList;
-    }
-
-    public List<SkuAttrValue> getSkuAttrValueList() {
-        return skuAttrValueList;
-    }
-
-    public void setSkuAttrValueList(List<SkuAttrValue> skuAttrValueList) {
-        this.skuAttrValueList = skuAttrValueList;
-    }
-
-    public List<SkuSaleAttrValue> getSkuSaleAttrValueList() {
-        return skuSaleAttrValueList;
-    }
-
-    public void setSkuSaleAttrValueList(List<SkuSaleAttrValue> skuSaleAttrValueList) {
-        this.skuSaleAttrValueList = skuSaleAttrValueList;
-    }
 }

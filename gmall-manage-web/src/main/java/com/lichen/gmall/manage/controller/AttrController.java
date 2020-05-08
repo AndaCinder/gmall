@@ -1,9 +1,9 @@
 package com.lichen.gmall.manage.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.lichen.gmall.bean.BaseAttrInfo;
 import com.lichen.gmall.bean.BaseAttrValue;
 import com.lichen.gmall.service.AttrService;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +37,7 @@ public class AttrController {
      */
     @RequestMapping("getAttrValueList")
     public List<BaseAttrValue> getAttrValueList(String attrId){
-        return attrService.getAttrValueList(attrId);
+        return attrService.getAttrValue(attrId);
     }
 
     /**

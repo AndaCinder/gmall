@@ -1,12 +1,12 @@
 package com.lichen.gmall.manage.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.lichen.gmall.bean.BaseAttrInfo;
 import com.lichen.gmall.bean.SkuInfo;
 import com.lichen.gmall.bean.SpuSaleAttr;
 import com.lichen.gmall.service.AttrService;
 import com.lichen.gmall.service.SkuService;
 import com.lichen.gmall.service.SpuService;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class SkuController {
 
     @RequestMapping("skuInfoListBySpu")
     public List<SkuInfo> skuInfoListBySpu(String spuId){
-        return skuService.skuInfoListBySpu(spuId);
+        return skuService.getSkuListBySpuId(spuId);
     }
 
     @RequestMapping("deleteSkInfoBySkuId")

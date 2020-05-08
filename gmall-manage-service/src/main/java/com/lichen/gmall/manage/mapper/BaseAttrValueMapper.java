@@ -6,12 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Set;
 
-/**
- * @author 李琛
- * 2019/7/10 - 10:36
- */
 public interface BaseAttrValueMapper extends Mapper<BaseAttrValue> {
-
-    List<BaseAttrInfo> selectAttrListByValueIds(@Param("ids") String join);
+    List<BaseAttrInfo> selectAttrListByValueIds(@Param("ids") Set<String> valueIds);
 }

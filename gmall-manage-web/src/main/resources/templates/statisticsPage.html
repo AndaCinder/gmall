@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计页面</title>
+
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="echartsDiv" style="width: 1200px;height:800px;"></div>
+</body>
+<script type="text/javascript" src="/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echartsDiv'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            areaStyle: {}
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    // myChart.setOption(option);
+
+    $(function () {  //{"skuNameList":["红色款iPhone XR 128GB","黑色款iPhone XR"],"saleList":[10,20]}
+        $.ajax({
+            type: 'get',
+            async: true,
+            url: "http://localhost:8081/stat/daily",
+            data:{},
+            dataType: 'json',
+            success:function (data) {
+                myChart.setOption({
+                    /*title: {
+                        text: '商品销量折线图'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: data.skuNameList
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: data.modifiedTime
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: data.serialList*/
+                    xAxis:{
+                        data: data.skuNameList,
+                        ype: 'category',
+                        boundaryGap: false,
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series:[
+                        {
+                            data: data.saleList,
+                            type: 'line',
+                            areaStyle: {}
+                        }
+                    ]
+                })
+            }
+        })
+    })
+</script>
+</html>

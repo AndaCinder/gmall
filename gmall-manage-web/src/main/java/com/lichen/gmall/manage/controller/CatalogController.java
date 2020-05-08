@@ -1,12 +1,10 @@
 package com.lichen.gmall.manage.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.lichen.gmall.bean.BaseCatalog1;
-import com.lichen.gmall.bean.BaseCatalog1Id;
 import com.lichen.gmall.bean.BaseCatalog2;
 import com.lichen.gmall.bean.BaseCatalog3;
 import com.lichen.gmall.service.CatalogService;
-import com.lichen.gmall.service.JsonCatalogService;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

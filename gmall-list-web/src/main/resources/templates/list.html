@@ -5,12 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/list/css/index.css">
-    <link rel="stylesheet" type="text/css" href="/static/list/font/iconfont.css">
-    <script src="/static/list/js/jquery-1.12.4.js"></script>
-    <title>商品页面</title>
-    <style type="text/css">
-    </style>
+    <link rel="stylesheet" href="/list/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/list/font/iconfont.css">
+    <script src="/list/js/jquery-1.12.4.js"></script>
+    <title>Document</title>
 </head>
 <body>
 <!--头部-->
@@ -36,7 +34,7 @@
 <!--搜索导航-->
 <div class="header_sous">
     <div class="logo">
-        <a href="#"><img src="/static/list/image/at.jpg" alt="" width="180px" height="70px"></a>
+        <a href="#"><img src="/list/image/at.jpg" alt="" width="180px" height="70px"></a>
     </div>
     <div class="header_form">
         <input id="keyword" name="keyword" type="text" placeholder="手机" />
@@ -45,7 +43,7 @@
     <div class="header_ico">
         <div class="header_gw">
             <span><a href="#">我的购物车</a></span>
-            <img src="/static/list/image/settleup-@1x.png" />
+            <img src="/list/image/settleup-@1x.png" />
             <span>0</span>
         </div>
         <div class="header_ko">
@@ -71,7 +69,7 @@
         <div class="GM_ipone_one a">
             筛选条件
         </div>
-        <i><img src="/static/list/image/right-@1x.png" alt=""></i>
+        <i><img src="/list/image/right-@1x.png" alt=""></i>
         <span th:if="${keyword}!=null" th:text="'&quot;'+${keyword}+'&quot;'">&quot;小米&quot;</span>
         <a class="select-attr"   th:each="baseAttrValueSelected:${attrValueSelectedList}"    th:href="'list.html?'+${baseAttrValueSelected.urlParam}"   th:utext=" ${baseAttrValueSelected.valueName} +'<b> ✖ </b>'"  > 2G<b> ✖ </b>
         </a>
@@ -199,8 +197,8 @@
                     <div class="rig_tab" style="width:940px">
                       <div style="width:215px" th:each="skuLsInfo:${skuLsInfoList}" >
                             <p class="da">
-                                <a href="#" th:onclick="item([[${skuLsInfo.id}]]);">
-                                    <img th:src="${skuLsInfo.skuDefaultImg}"   src="/static/list/img/57d0d400nfd249af4.jpg" class="dim">
+                                <a href="#" th:onclick="'javascript:item(\''+${skuLsInfo.id}+'\')'">
+                                    <img th:src="${skuLsInfo.skuDefaultImg}"   src="/list/img/57d0d400nfd249af4.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -208,14 +206,14 @@
                                 <span th:text="'￥'+${#numbers.formatDecimal(skuLsInfo.price,1,2)}">¥5199.00</span>
                             </p>
 
-                                <a href="#" title=""   th:onclick="item([[${skuLsInfo.id}]]);" class="tab_JE" th:utext="${skuLsInfo.skuName}" >
+                                <a href="#" title=""   th:onclick="'javascript:item(\''+${skuLsInfo.id}+'\')'" class="tab_JE" th:utext="${skuLsInfo.skuName}" >
                                     Apple iPhone 7 Plus (A1661) 32G 黑色 移动联通电信4G手机
-                                </a><!--'javascript:item(\''+${skuLsInfo.id}+'\');' 这是错误的-->   <!--item([[${skuLsInfo.id}]]); 这才是正确的-->
+                                </a>
                         </div>
                          <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/57d0d400nfd249af4.jpg" class="dim">
+                                    <img src="/list/img/57d0d400nfd249af4.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -230,7 +228,7 @@
 					  <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/57d0d400nfd249af4.jpg" class="dim">
+                                    <img src="/list/img/57d0d400nfd249af4.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -245,7 +243,7 @@
 						 <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/57d0d400nfd249af4.jpg" class="dim">
+                                    <img src="/list/img/57d0d400nfd249af4.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -261,7 +259,7 @@
 					     <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/58d1d078N20e18b62.jpg" class="dim">
+                                    <img src="/list/img/58d1d078N20e18b62.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -276,7 +274,7 @@
 					   <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/58d1d078N20e18b62.jpg" class="dim">
+                                    <img src="/list/img/58d1d078N20e18b62.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -291,7 +289,7 @@
 					  <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/58d1d078N20e18b62.jpg" class="dim">
+                                    <img src="/list/img/58d1d078N20e18b62.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -306,7 +304,7 @@
 					  <div style="width:215px">
                             <p class="da">
                                 <a href="#" >
-                                    <img src="/static/list/img/58d1d078N20e18b62.jpg" class="dim">
+                                    <img src="/list/img/58d1d078N20e18b62.jpg" class="dim">
                                 </a>
                             </p>
 
@@ -399,7 +397,7 @@
 </footer>
 
 
-<script src="/static/list/js/index.js"></script>
+<script src="/list/js/index.js"></script>
 <script language="JavaScript">
     function item(skuid) {
         console.log("skuid:"+skuid);

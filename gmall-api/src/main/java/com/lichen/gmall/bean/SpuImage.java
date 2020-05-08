@@ -1,57 +1,48 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * @param
- * @return
- */
 public class SpuImage implements Serializable {
 
-    @Column
-    @Id
-    private String id;
-    @Column
-    private String spuId;
-    @Column
-    private String imgName;
-    @Column
-    private String imgUrl;
+  private String id;
+  private String spuId;
+  private String imgName;
+  private String imgUrl;
 
-    public SpuImage() {
-    }
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getSpuId() {
-        return spuId;
-    }
 
-    public void setSpuId(String spuId) {
-        this.spuId = spuId;
-    }
+  public String getSpuId() {
+    return spuId;
+  }
 
-    public String getImgName() {
-        return imgName;
-    }
+  public void setSpuId(String spuId) {
+    this.spuId = spuId;
+  }
 
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
-    }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+  public String getImgName() {
+    return imgName;
+  }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
+  public void setImgName(String imgName) {
+    this.imgName = imgName;
+  }
+
+
+  public String getImgUrl() {
+    return imgUrl;
+  }
+
+  public void setImgUrl(String imgUrl) {
+    this.imgUrl = imgUrl;
+  }
+
 }

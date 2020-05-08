@@ -2,45 +2,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.lichen.gmall</groupId>
         <artifactId>gmall-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
+
     </parent>
     <groupId>com.lichen.gmall</groupId>
     <artifactId>gmall-list-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gmall-list-service</name>
+    <name>gmall-list-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
+
+
         <dependency>
             <groupId>com.lichen.gmall</groupId>
             <artifactId>gmall-api</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
 
+        </dependency>
         <dependency>
             <groupId>com.lichen.gmall</groupId>
             <artifactId>gmall-service-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-        <!--ES starter 不用管理版本号，跟随SpringBoot的版本号而变-->
         <dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <!--引入Jest-->
+
         <!-- https://mvnrepository.com/artifact/io.searchbox/jest -->
         <dependency>
             <groupId>io.searchbox</groupId>
             <artifactId>jest</artifactId>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
         <dependency>
@@ -50,6 +55,7 @@
 
 
     </dependencies>
+
 
     <build>
         <plugins>

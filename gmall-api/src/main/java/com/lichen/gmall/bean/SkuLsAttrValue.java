@@ -1,14 +1,9 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * @param
- * @return
- */
 public class SkuLsAttrValue implements Serializable {
+
 
     String valueId;
 

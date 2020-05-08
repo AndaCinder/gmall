@@ -1,0 +1,13 @@
+spring:
+  redis:
+    host: 192.168.226.128
+    port: 6379
+    database: 2
+
+# 线程池
+thread:
+  pool:
+    coreSize: 100
+    maxSize: 500
+    keepAliveTime: 60
+    queueSize: 1000

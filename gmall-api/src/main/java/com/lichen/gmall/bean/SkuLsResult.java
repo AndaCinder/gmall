@@ -3,10 +3,6 @@ package com.lichen.gmall.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @param
- * @return
- */
 public class SkuLsResult implements Serializable{
 
     List<SkuLsInfo> skuLsInfoList;

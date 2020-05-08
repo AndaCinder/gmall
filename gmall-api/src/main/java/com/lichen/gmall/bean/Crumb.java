@@ -1,8 +1,5 @@
 package com.lichen.gmall.bean;
 
-/**
- * 面包屑Bean
- */
 public class Crumb {
 
     private String valueName;

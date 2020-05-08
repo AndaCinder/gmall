@@ -24,4 +24,7 @@ public class IndexController {
     public String spuListPage(){
         return "spuListPage";
     }
+
+    @RequestMapping("statisticsPage")
+    public String statisticsPage(){return "statisticsPage";}
 }

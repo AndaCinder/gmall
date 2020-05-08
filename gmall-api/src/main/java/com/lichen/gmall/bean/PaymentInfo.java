@@ -1,126 +1,117 @@
 package com.lichen.gmall.bean;
 
-import com.lichen.gmall.bean.enums.PaymentStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.math.BigDecimal;
-import java.util.Date;
-
-/**
- * @param
- * @return
- */
 public class PaymentInfo {
 
-    @Column
-    @Id
-    private String  id;
+  private long id;
+  private String outTradeNo;
+  private String orderId;
+  private String alipayTradeNo;
+  private double totalAmount;
+  private String subject;
+  private String paymentStatus;
+  private java.sql.Timestamp createTime;
+  private java.sql.Timestamp confirmTime;
+  private String callbackContent;
+  private java.sql.Timestamp callbackTime;
 
-    @Column
-    private String outTradeNo;
 
-    @Column
-    private String orderId;
+  public long getId() {
+    return id;
+  }
 
-    @Column
-    private String alipayTradeNo;
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    @Column
-    private BigDecimal totalAmount;
 
-    @Column
-    private String Subject;
+  public String getOutTradeNo() {
+    return outTradeNo;
+  }
 
-    @Column
-    private String paymentStatus;
+  public void setOutTradeNo(String outTradeNo) {
+    this.outTradeNo = outTradeNo;
+  }
 
-    @Column
-    private Date createTime;
 
-    @Column
-    private Date callbackTime;
+  public String getOrderId() {
+    return orderId;
+  }
 
-    @Column
-    private String callbackContent;
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getAlipayTradeNo() {
+    return alipayTradeNo;
+  }
 
-    public String getOutTradeNo() {
-        return outTradeNo;
-    }
+  public void setAlipayTradeNo(String alipayTradeNo) {
+    this.alipayTradeNo = alipayTradeNo;
+  }
 
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
-    }
 
-    public String getOrderId() {
-        return orderId;
-    }
+  public double getTotalAmount() {
+    return totalAmount;
+  }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+  public void setTotalAmount(double totalAmount) {
+    this.totalAmount = totalAmount;
+  }
 
-    public String getAlipayTradeNo() {
-        return alipayTradeNo;
-    }
 
-    public void setAlipayTradeNo(String alipayTradeNo) {
-        this.alipayTradeNo = alipayTradeNo;
-    }
+  public String getSubject() {
+    return subject;
+  }
 
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
+  public void setSubject(String subject) {
+    this.subject = subject;
+  }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
 
-    public String getSubject() {
-        return Subject;
-    }
+  public String getPaymentStatus() {
+    return paymentStatus;
+  }
 
-    public void setSubject(String subject) {
-        Subject = subject;
-    }
+  public void setPaymentStatus(String paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
+  public java.sql.Timestamp getCreateTime() {
+    return createTime;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setCreateTime(java.sql.Timestamp createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
-    public Date getCallbackTime() {
-        return callbackTime;
-    }
+  public java.sql.Timestamp getConfirmTime() {
+    return confirmTime;
+  }
 
-    public void setCallbackTime(Date callbackTime) {
-        this.callbackTime = callbackTime;
-    }
+  public void setConfirmTime(java.sql.Timestamp confirmTime) {
+    this.confirmTime = confirmTime;
+  }
 
-    public String getCallbackContent() {
-        return callbackContent;
-    }
 
-    public void setCallbackContent(String callbackContent) {
-        this.callbackContent = callbackContent;
-    }
+  public String getCallbackContent() {
+    return callbackContent;
+  }
+
+  public void setCallbackContent(String callbackContent) {
+    this.callbackContent = callbackContent;
+  }
+
+
+  public java.sql.Timestamp getCallbackTime() {
+    return callbackTime;
+  }
+
+  public void setCallbackTime(java.sql.Timestamp callbackTime) {
+    this.callbackTime = callbackTime;
+  }
+
 }

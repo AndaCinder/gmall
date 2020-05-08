@@ -1,109 +1,111 @@
 package com.lichen.gmall.bean;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
 
-/**
- * @author 李琛
- * 2019/6/27 - 11:03
- */
 public class UserInfo implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column
-    private String id;
-    @Column
-    private String loginName;
-    @Column
-    private String nickName;
-    @Column
-    private String passwd;
-    @Column
-    private String name;
-    @Column
-    private String phoneNum;
-    @Column
-    private String email;
-    @Column
-    private String headIimg;
-    @Column
-    private String userLevel;
+  private String id;
+  private String loginName;
+  private String nickName;
+  private String passwd;
+  private String name;
+  private String phoneNum;
+  private String email;
+  private String headImg;
+  private String userLevel;
 
-    public String getId() {
-        return id;
-    }
+  @Transient
+  List<UserAddress> userAddressList;
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public String getLoginName() {
-        return loginName;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getNickName() {
-        return nickName;
-    }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+  public String getLoginName() {
+    return loginName;
+  }
 
-    public String getPasswd() {
-        return passwd;
-    }
+  public void setLoginName(String loginName) {
+    this.loginName = loginName;
+  }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
 
-    public String getName() {
-        return name;
-    }
+  public String getNickName() {
+    return nickName;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
+  }
 
-    public String getPhoneNum() {
-        return phoneNum;
-    }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
+  public String getPasswd() {
+    return passwd;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setPasswd(String passwd) {
+    this.passwd = passwd;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public String getHeadIimg() {
-        return headIimg;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setHeadIimg(String headIimg) {
-        this.headIimg = headIimg;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getUserLevel() {
-        return userLevel;
-    }
 
-    public void setUserLevel(String userLevel) {
-        this.userLevel = userLevel;
-    }
+  public String getPhoneNum() {
+    return phoneNum;
+  }
+
+  public void setPhoneNum(String phoneNum) {
+    this.phoneNum = phoneNum;
+  }
+
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+
+  public String getHeadImg() {
+    return headImg;
+  }
+
+  public void setHeadImg(String headImg) {
+    this.headImg = headImg;
+  }
+
+
+  public String getUserLevel() {
+    return userLevel;
+  }
+
+  public void setUserLevel(String userLevel) {
+
+    this.userLevel = userLevel;
+  }
+
+  public List<UserAddress> getUserAddressList() {
+    return userAddressList;
+  }
+
+  public void setUserAddressList(List<UserAddress> userAddressList) {
+    this.userAddressList = userAddressList;
+  }
 }

@@ -1,65 +1,48 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
-/**
- * @param
- * @return
- */
 public class BaseAttrValue implements Serializable {
-    @Id
-    @Column
-    private String id;
-    @Column
-    private String valueName;
-    @Column
-    private String attrId;
-    @Column
-    private String isEnabled;
 
-    @Transient
-    private String urlParam;
+  private String id;
+  private String valueName;
+  private String attrId;
+  private String isEnabled;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public String getValueName() {
-        return valueName;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public void setValueName(String valueName) {
-        this.valueName = valueName;
-    }
 
-    public String getAttrId() {
-        return attrId;
-    }
+  public String getValueName() {
+    return valueName;
+  }
 
-    public void setAttrId(String attrId) {
-        this.attrId = attrId;
-    }
+  public void setValueName(String valueName) {
+    this.valueName = valueName;
+  }
 
-    public String getIsEnabled() {
-        return isEnabled;
-    }
 
-    public void setIsEnabled(String isEnabled) {
-        this.isEnabled = isEnabled;
-    }
+  public String getAttrId() {
+    return attrId;
+  }
 
-    public String getUrlParam() {
-        return urlParam;
-    }
+  public void setAttrId(String attrId) {
+    this.attrId = attrId;
+  }
 
-    public void setUrlParam(String urlParam) {
-        this.urlParam = urlParam;
-    }
+
+  public String getIsEnabled() {
+    return isEnabled;
+  }
+
+  public void setIsEnabled(String isEnabled) {
+    this.isEnabled = isEnabled;
+  }
+
 }

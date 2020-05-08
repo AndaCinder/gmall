@@ -1,57 +1,19 @@
 package com.lichen.gmall.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
-/**
- * @param
- * @return
- */
+@Data
+@Accessors(chain = true)
 public class SkuAttrValue implements Serializable {
 
-    @Id
-    @Column
-    String id;
+  private String id;
+  private String attrId;
+  private String valueId;
+  private String skuId;
 
-    @Column
-    String attrId;
 
-    @Column
-    String valueId;
 
-    @Column
-    String skuId;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAttrId() {
-        return attrId;
-    }
-
-    public void setAttrId(String attrId) {
-        this.attrId = attrId;
-    }
-
-    public String getValueId() {
-        return valueId;
-    }
-
-    public void setValueId(String valueId) {
-        this.valueId = valueId;
-    }
-
-    public String getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(String skuId) {
-        this.skuId = skuId;
-    }
 }

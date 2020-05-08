@@ -1,6 +1,5 @@
 package com.lichen.gmall.manage;
 
-import com.lichen.gmall.service.JsonCatalogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +28,12 @@ public class GmallManageServiceApplicationTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/getJson")
                 .accept(MediaType.APPLICATION_JSON));
     }*/
-    @Autowired
+  /*  @Autowired
     JsonCatalogService catalogService;
 
     @Test
     public void contextLoads() {
         catalogService.getJson();
-    }
+    }*/
 
 }
