@@ -1,6 +1,7 @@
 package com.lichen.gmall.list.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.lichen.gmall.annotation.GmallCache;
 import com.lichen.gmall.bean.SkuLsInfo;
 import com.lichen.gmall.bean.SkuLsParam;
 import com.lichen.gmall.service.SearchService;
@@ -96,8 +97,6 @@ public class SearchServiceImpl implements SearchService {
 
         return dsl.toString();
     }
-
-
 
 
 

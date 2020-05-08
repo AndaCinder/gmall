@@ -2,6 +2,7 @@ package com.lichen.gmall.manage.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.lichen.gmall.annotation.GmallCache;
 import com.lichen.gmall.bean.SkuAttrValue;
 import com.lichen.gmall.bean.SkuImage;
 import com.lichen.gmall.bean.SkuInfo;
@@ -68,54 +69,17 @@ public class SkuServiceImpl implements SkuService {
 
     }
 
+    /**
+     * 加分布式锁
+     * 通过AOP的方式
+     * @param skuId
+     * @return
+     */
     @Override
+    @GmallCache(prefix = "manage:skuids",lock = "locks:",random = 10,timeout = 1440)
     public SkuInfo getSkuById(String skuId) {
-        //redis缓存和缓存锁应该为不同的节点，这里简化为在同一个节点上
-
-        Jedis jedis = redisUtil.getJedis();
-        SkuInfo skuInfo = null;
-
-        //查询redis缓存
-        String key = "sku:" + skuId + ":info";
-        String val = jedis.get(key);
-        //此数据在数据库中也没有，直接返回空值
-        if ("empty".equals(val)) {
-            return skuInfo;
-        }
-
-        if (StringUtils.isBlank(val)) {//没有命中缓存，查询数据库
-
-            //申请缓存锁
-            String OK = jedis.set("sku:" + skuId + ":lock", "1", "nx", "px", 3000);
-
-            if ("OK".equals(OK)) {//拿到缓存锁
-                //查询数db
-                skuInfo = getSkuByIdFormDb(skuId);
-
-                if (skuInfo != null) {
-                    //同步缓存
-                    jedis.set(key, JSON.toJSONString(skuInfo));
-                } else {
-                    //通知同伴
-                    jedis.setex("sku:" + skuId + ":info", 10, "empty");
-                }
-                //归还锁
-                jedis.del("sku:" + skuId + ":lock");
-
-            } else {//没有拿到缓存锁
-                //自旋
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                getSkuById(skuId);
-
-            }
-        } else {//查询的数据在缓存中
-            skuInfo = JSON.parseObject(val, SkuInfo.class);
-        }
-        return skuInfo;
+        //查询数db
+        return  getSkuByIdFormDb(skuId);
     }
 
     @Override
